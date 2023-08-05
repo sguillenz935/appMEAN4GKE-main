@@ -1,0 +1,19 @@
+# Traemos la imagen de Node desde Docker HUB
+FROM node:14-slim
+
+# Establecemos el directorio de trabajo
+WORKDIR /usr/app
+
+# Copiamos unicamente los package.json
+COPY package*.json ./
+
+# Instalamos las dependencias
+RUN npm install
+
+# Copiamos el resto del codigo al contendor
+COPY . .
+
+EXPOSE 3080
+
+# Iniciamos la API de nodemon
+CMD ["npm", "run", "dev"]

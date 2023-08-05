@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "http://mean-api:3080",
+        "secure": false
+    }
+}

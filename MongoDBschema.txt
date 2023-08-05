@@ -1,0 +1,1 @@
+{"_id":{"$oid":"6457f7da135593e637785903"},"name":"name1","createDate":{"$date":{"$numberLong":"1683417600000"}},"createdBy":"first last","description":"Name 1 description","updatedBy":"first last","updatedDate":{"$date":{"$numberLong":"1683417600000"}}}

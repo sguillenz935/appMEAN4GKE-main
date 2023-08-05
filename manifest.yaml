@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: clusterapp
+  name: clusterapp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: clusterapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: clusterapp
+    spec:
+      containers:
+      - image: gcr.io/clustertfg/clusterapp:v1
+        name: clusterapp
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 80 
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: clusterapp
+  labels:
+    run: clusterapp
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: clusterapp
+  type: LoadBalancer

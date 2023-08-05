@@ -1,0 +1,19 @@
+# Traemos la imagen de Node desde Docker HUB
+FROM node:14-slim
+
+# Seleccionamos el directorio donde trabajara
+WORKDIR /usr/app
+
+# Copiamos unicamente los package.json
+COPY package*.json ./
+
+# Instalamos las dependencias 
+RUN npm install
+
+# Copiamos el resto del codigo al contendor
+COPY . .
+
+EXPOSE 4200
+
+# Iniciamos la app de react
+CMD ["npm", "run", "start-on-docker"]

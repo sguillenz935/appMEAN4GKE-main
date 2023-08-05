@@ -1,0 +1,83 @@
+<div class="container">
+    <h2>Tareas</h2>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Id Tarea</th>
+          <th>Nombre Tarea</th>
+          <th>Asignacion</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks; let i = index">
+          <td>
+            {{task._id}}
+          </td>
+          <td>
+            {{task.task}}
+          </td>
+          <td>
+            {{task.assignee}}
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-md-6">
+                {{task.status}}
+              </div>
+              <div class="col-md-3">
+                <button type="button" (click)="openModal(template, task)" class="btn btn-warning right">Editar</button>
+              </div>
+              <div class="col-md-3">
+                <button type="button" (click)="delTask(task._id)" class="btn btn-danger right">Borrar</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Editar tarea</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="exampleInputEmail1">Id</label>
+            {{editingId}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="exampleInputEmail1">Tarea</label>
+            <input type="text" class="form-control" formControlName="task" id="exampleInputEmail1" placeholder="Crea una tarea">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="exampleInputPassword1">Asignacion</label>
+            <input type="text" class="form-control" formControlName="assignee" id="exampleInputPassword1" placeholder="Asignacion">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="sel1">Estado:</label>
+            <select formControlName="status" class="form-control" id="sel1">
+              <option>Por hacer</option>
+              <option>En progreso</option>
+              <option>Completado</option>
+            </select>
+          </div>
+        </div>
+        <div class="btncenter">
+          <button type="submit" [disabled]="!editForm.valid" class="btn btn-danger">Confirmado</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
